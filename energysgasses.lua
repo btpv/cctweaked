@@ -30,9 +30,12 @@ function energyLevelFormat(energyLevel)
     end
     return energyLevelFormated
 end
-glasses = peripheral.wrap("arController_0")
-glasses.clear()
+
 while true do
+    controllers= find("arController")
+    for i, v in pairs(controllers) do
+        glasses = v
+    end
     disks = find("drive")
     for i, v in pairs(disks) do
         if v.isDiskPresent() then
@@ -73,13 +76,13 @@ while true do
         energyLevelFormated = energyLevelFormat(energyLevel)
         energyMaxLevel = v.getMaxEnergy()
         energyMaxLevelFormated = energyLevelFormat(energyMaxLevel)
-        print(i.. ":    "..energyLevelFormated .. "/" .. energyMaxLevelFormated)
+        print(i .. ":    " .. energyLevelFormated .. "/" .. energyMaxLevelFormated)
         energyLevelall = energyLevelall + energyLevel
         energyMaxLevelall = energyMaxLevelall + energyMaxLevel
     end
     energyLevelallFormated = energyLevelFormat(energyLevelall)
     energyMaxLevelallFormated = energyLevelFormat(energyMaxLevelall)
-    print("all:  ".. energyLevelallFormated .. "/" .. energyMaxLevelallFormated)
+    print("all:  " .. energyLevelallFormated .. "/" .. energyMaxLevelallFormated)
     glasses.clear()
     glasses.drawString(transferrateallFormated .. "/" .. transferrateLimitallFormated, 10, 10, 0xffffff)
     glasses.drawString(energyLevelallFormated .. "/" .. energyMaxLevelallFormated, 10, 20, 0xffffff)
